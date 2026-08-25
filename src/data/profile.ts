@@ -12,7 +12,7 @@ export const profile = {
   github: "https://github.com/Akhila14",
   portraitAlt: "Akhila Nair standing outdoors along a green walkway",
   summary:
-    "Senior DevOps Engineer with 6+ years of experience building scalable cloud-native platforms and reliability systems across AWS and Azure. I work where Kubernetes, infrastructure automation, observability, and AI-assisted operations meet."
+    "Senior DevOps Engineer with 6.5 years of experience building scalable cloud-native platforms and reliability systems across AWS and Azure. I work where Kubernetes, infrastructure automation, observability, and AI-assisted operations meet."
 };
 
 export const metrics = [
