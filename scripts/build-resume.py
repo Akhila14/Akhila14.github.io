@@ -155,7 +155,7 @@ jobs = [
 story = [
     p("Akhila Nair", styles["Name"]),
     p("Senior DevOps Engineer", styles["Role"]),
-    p("+91 7900006827 - akhilanair1412@gmail.com - linkedin.com/in/akhilanair - medium.com/@akhila_nair", styles["Contact"]),
+    p("akhilanair1412@gmail.com - linkedin.com/in/akhilanair - medium.com/@akhila_nair", styles["Contact"]),
     p("Exploring opportunities in Bangalore, Mumbai, and Dubai.", styles["Contact"]),
     p("PROFILE SUMMARY", styles["Section"]),
     p(summary, styles["Body"]),

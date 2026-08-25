@@ -5,7 +5,6 @@ export const profile = {
   availability: "Exploring opportunities in Bangalore, Mumbai, and Dubai.",
   locationSignal: "Bangalore · Mumbai · Dubai",
   email: "akhilanair1412@gmail.com",
-  phone: "+91 7900006827",
   linkedin: "https://linkedin.com/in/akhilanair",
   medium: "https://medium.com/@akhila_nair",
   resume: "/akhila-nair-resume.pdf",
