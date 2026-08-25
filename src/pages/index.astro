@@ -1,0 +1,225 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import SiteHeader from "@components/SiteHeader.astro";
+import Footer from "@components/Footer.astro";
+import ContactActions from "@components/ContactActions";
+import CharacterStory from "@components/CharacterStory";
+import {
+  capabilities,
+  caseStudies,
+  certifications,
+  profile,
+  sideProjects,
+  writing
+} from "@data/profile";
+
+const pathItems = [
+  {
+    period: "2024 — now",
+    title: "Senior DevOps Engineer",
+    detail: "Razorpay · Bangalore"
+  },
+  {
+    period: "2021 — 2024",
+    title: "DevOps Engineer → Senior DevOps Engineer",
+    detail: "Tresata · Bangalore"
+  },
+  {
+    period: "2020 — 2021",
+    title: "Software Quality Assurance Engineer",
+    detail: "Rapid Micro Bio Systems · Lowell"
+  },
+  {
+    period: "2017 — 2019",
+    title: "Masters in Computer Engineering",
+    detail: "University of Massachusetts Boston"
+  },
+  {
+    period: "2013 — 2017",
+    title: "Bachelors in Electronics Engineering",
+    detail: "University of Mumbai"
+  }
+];
+---
+
+<BaseLayout>
+  <SiteHeader />
+  <main id="main" class="story-site">
+    <section class="home-hero" aria-label="Introduction" data-story-frame="0">
+      <div class="hero-character">
+        <CharacterStory client:load variant="hero" />
+      </div>
+      <div class="hero-copy">
+        <p class="tiny-label">Hi, I’m Akhila Nair.</p>
+        <h1>I make production systems calmer.</h1>
+        <p class="hero-lede">
+          I work on production systems where downtime is expensive, context is everything, and good automation can
+          change how teams operate. I’m a Senior DevOps Engineer with 6.5 years of experience, currently at Razorpay,
+          building across Kubernetes, reliability, disaster recovery, and AI assisted DevOps.
+        </p>
+        <div class="hero-links" aria-label="Primary actions">
+          <a href="#work">see the work →</a>
+          <a href={profile.resume} download>resume (PDF) →</a>
+          <a href={`mailto:${profile.email}`}>{profile.email}</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="work-index" aria-labelledby="work-title">
+      <div class="section-kicker">work</div>
+      <h2 id="work-title">Production systems I’ve worked on.</h2>
+      <p>
+        A few examples from platform and reliability work: readiness, Kubernetes upgrades, and incident review.
+        Open any one for the fuller problem, approach, and outcome.
+      </p>
+      <div class="work-list">
+        {caseStudies.map((study, index) => (
+          <a class={`work-card work-card-${index + 1}`} href={`/case-studies/${study.slug}/`}>
+            <span class="work-scene" aria-hidden="true">
+              <span class="scene-line"></span>
+              <span class="scene-dot scene-dot-a"></span>
+              <span class="scene-dot scene-dot-b"></span>
+              <span class="scene-dot scene-dot-c"></span>
+            </span>
+            <span class="work-kicker">{String(index + 1).padStart(2, "0")} / {study.kicker}</span>
+            <strong>{study.title}</strong>
+            <small>{study.homepageSummary}</small>
+            <em>{study.homepageNote} →</em>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section id="side-projects" class="side-projects-section">
+      <div class="section-heading">
+        <p class="section-kicker">side quests</p>
+        <h2>Little tools I built because I was curious.</h2>
+        <p>
+          This is the part I hope makes people smile a bit: small, local-first projects that came from “wait, why is
+          this annoying?” and turned into useful systems.
+        </p>
+      </div>
+      <div class="side-project-list">
+        {sideProjects.map((project, index) => (
+          <a href={project.url} rel="noreferrer">
+            <span>{String(index + 1).padStart(2, "0")} / {project.label}</span>
+            <strong>{project.title}</strong>
+            <p>{project.summary}</p>
+            <small>{project.detail}</small>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section id="process" class="process-section">
+      <div>
+        <p class="section-kicker">how I work</p>
+        <h2>I turn operational anxiety into visible systems.</h2>
+      </div>
+      <ol class="process-list">
+        <li>
+          <span>01</span>
+          <strong>Make the invisible visible.</strong>
+          <p>Map the actual signals: incidents, logs, ownership, risk, dependency paths, and the places people guess.</p>
+        </li>
+        <li>
+          <span>02</span>
+          <strong>Automate the repeatable parts.</strong>
+          <p>Codify checks, scorecards, upgrade paths, and review flows so the team can move with confidence.</p>
+        </li>
+        <li>
+          <span>03</span>
+          <strong>Keep humans in the hard decisions.</strong>
+          <p>Use AI to compress prep work, not to hide accountability. The machine drafts; the engineer decides.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="experience" class="experience-section">
+      <div class="section-heading">
+        <p class="section-kicker">path here</p>
+        <h2>The short version.</h2>
+      </div>
+      <div class="path-list">
+        {pathItems.map((item) => (
+          <article class="path-item">
+            <span>{item.period}</span>
+            <strong>{item.title}</strong>
+            <p>{item.detail}</p>
+          </article>
+        ))}
+        <article class="path-item path-item--certs">
+          <span>certifications</span>
+          <strong>{certifications.join(" · ")}</strong>
+        </article>
+      </div>
+    </section>
+
+    <section class="capabilities-section" aria-labelledby="capabilities-title">
+      <p class="section-kicker">tools I reach for</p>
+      <h2 id="capabilities-title">Cloud-native, reliability, and AI operations.</h2>
+      <div class="capability-cloud">
+        {capabilities.flatMap((capability) => capability.skills).map((skill) => <span>{skill}</span>)}
+      </div>
+    </section>
+
+    <section id="writing" class="writing-section">
+      <div class="section-heading">
+        <p class="section-kicker">writing</p>
+        <h2>Where DevOps Ends and AI Begins.</h2>
+        <p>Public notes on incidents, agents, dashboards, and the messy human edge of automation.</p>
+      </div>
+      <div class="writing-list" aria-label="Selected Medium writing">
+        {writing.map((article) => (
+          <a href={article.url} rel="noreferrer">
+            <span>{article.label}</span>
+            <strong>{article.homeTitle}</strong>
+            <small>{article.note}</small>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section id="about" class="about-section">
+      <div class="about-layout">
+        <figure class="about-doodle">
+          <img
+            src="/akhila-about-chico.jpg"
+            alt="Hand-drawn Akhila sitting in a park with coffee, a ball, and Chico the dog"
+            loading="lazy"
+            width="1200"
+            height="800"
+          />
+        </figure>
+        <div class="about-letter">
+          <p class="section-kicker">if you’re curious</p>
+          <h2>A little more about me.</h2>
+          <p>
+            I’m Akhila. I like the part of engineering where production reality meets new ideas. At work, that usually
+            means Kubernetes, reliability, disaster recovery, observability, incident review, and figuring out where AI
+            can actually help instead of just sounding impressive.
+          </p>
+          <p>
+            My strongest work happens when a problem is messy and operational: a release needs a clear gate, a cluster
+            upgrade needs a safer path, an incident needs context, or a team needs tooling that explains what changed.
+            I enjoy turning that ambiguity into systems people can trust and use.
+          </p>
+          <p>
+            I keep up with the latest AI by building with it, not just reading about it. Some experiments become side
+            projects, some become writing, and some quietly change how I think about production work.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+      <div>
+        <p class="section-kicker">contact</p>
+        <h2>Let’s build systems that behave beautifully under pressure.</h2>
+        <p>{profile.availability}</p>
+      </div>
+      <ContactActions client:load />
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

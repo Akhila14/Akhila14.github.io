@@ -1,0 +1,67 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import SiteHeader from "@components/SiteHeader.astro";
+import Footer from "@components/Footer.astro";
+import { caseStudies, profile } from "@data/profile";
+
+type CaseStudy = (typeof caseStudies)[number];
+
+const { study } = Astro.props as { study: CaseStudy };
+const title = `${study.title} - ${profile.name}`;
+---
+
+<BaseLayout title={title} description={study.summary}>
+  <SiteHeader />
+  <main id="main" class="case-page">
+    <section class="case-hero">
+      <p class="eyebrow">{study.kicker}</p>
+      <h1>{study.title}</h1>
+      <p class="lede">{study.summary}</p>
+      <div class="case-hero-grid" aria-label="Case study summary">
+        <div>
+          <span>Outcome</span>
+          <strong>{study.result}</strong>
+        </div>
+        <div>
+          <span>Scale</span>
+          <strong>{study.scale}</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-body">
+      <div class="case-copy">
+        <h2>Problem</h2>
+        <p>{study.problem}</p>
+        <h2>Approach</h2>
+        <p>{study.approach}</p>
+        <h2>Contribution</h2>
+        <p>{study.contribution}</p>
+        <h2>Measured outcome</h2>
+        <p>{study.outcome}</p>
+      </div>
+      <aside class="architecture" aria-label={`${study.title} architecture illustration`}>
+        <h2>Architecture path</h2>
+        <ol>
+          {study.architecture.map((step, index) => (
+            <li style={`--i:${index}`}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <strong>{step}</strong>
+            </li>
+          ))}
+        </ol>
+        <div class="tag-cloud">
+          {study.stack.map((item) => <span>{item}</span>)}
+        </div>
+      </aside>
+    </section>
+
+    <nav class="case-nav" aria-label="Case studies">
+      <a href="/">Back home</a>
+      {caseStudies
+        .filter((item) => item.slug !== study.slug)
+        .map((item) => <a href={`/case-studies/${item.slug}/`}>{item.title}</a>)}
+    </nav>
+  </main>
+  <Footer />
+</BaseLayout>

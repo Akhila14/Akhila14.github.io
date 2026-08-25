@@ -1,0 +1,8 @@
+---
+import CaseStudyLayout from "@layouts/CaseStudyLayout.astro";
+import { caseStudies } from "@data/profile";
+
+const study = caseStudies.find((item) => item.slug === "production-readiness")!;
+---
+
+<CaseStudyLayout study={study} />
