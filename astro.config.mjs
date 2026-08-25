@@ -3,7 +3,7 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import { fileURLToPath } from "node:url";
 
-const site = process.env.SITE_URL || "https://akhila14.github.io";
+const site = process.env.SITE_URL || "https://akhilanair.com";
 
 export default defineConfig({
   site,
