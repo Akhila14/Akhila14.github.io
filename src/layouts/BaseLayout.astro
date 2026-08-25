@@ -1,6 +1,7 @@
 ---
 import "@styles/global.css";
 import { profile } from "@data/profile";
+import Analytics from "@components/Analytics.astro";
 
 type Props = {
   title?: string;
@@ -74,6 +75,7 @@ const jsonLd = {
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <slot />
+    <Analytics />
     <script is:inline>
       const root = document.documentElement;
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");

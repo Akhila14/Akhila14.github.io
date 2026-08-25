@@ -1,0 +1,125 @@
+---
+const posthogKey = process.env.PUBLIC_POSTHOG_KEY || "";
+const posthogHost = process.env.PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com";
+const analyticsEnabled = Boolean(posthogKey);
+---
+
+{analyticsEnabled && (
+  <script
+    is:inline
+    define:vars={{
+      posthogKey,
+      posthogHost
+    }}
+  >
+    (function (t, e) {
+      var o, n, p, r;
+      e.__SV ||
+        ((window.posthog = e),
+        (e._i = []),
+        (e.init = function (i, s, a) {
+          function g(t, e) {
+            var o = e.split(".");
+            o.length === 2 && ((t = t[o[0]]), (e = o[1]));
+            t[e] = function () {
+              t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+            };
+          }
+          ((p = t.createElement("script")).type = "text/javascript"),
+            (p.crossOrigin = "anonymous"),
+            (p.async = true),
+            (p.src = s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/array.js"),
+            (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r);
+          var u = e;
+          for (
+            a !== undefined ? (u = e[a] = []) : (a = "posthog"),
+              u.people = u.people || [],
+              u.toString = function (t) {
+                var e = "posthog";
+                return a !== "posthog" && (e += "." + a), t || (e += " (stub)"), e;
+              },
+              u.people.toString = function () {
+                return u.toString(1) + ".people (stub)";
+              },
+              o =
+                "init capture register register_once unregister identify alias set_config get_config get_property get_distinct_id isFeatureEnabled onFeatureFlags reloadFeatureFlags updateEarlyAccessFeatureEnrollment getFeatureFlag getFeatureFlagPayload reset group opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug get_session_id".split(
+                  " "
+                ),
+              n = 0;
+            n < o.length;
+            n++
+          )
+            g(u, o[n]);
+          e._i.push([i, s, a]);
+        }),
+        (e.__SV = 1));
+    })(document, window.posthog || []);
+
+    posthog.init(posthogKey, {
+      api_host: posthogHost,
+      capture_pageview: false,
+      autocapture: false,
+      person_profiles: "identified_only",
+      persistence: "localStorage+cookie",
+      loaded: function (posthog) {
+        posthog.capture("portfolio_viewed", {
+          path: window.location.pathname,
+          title: document.title,
+          referrer_domain: document.referrer ? new URL(document.referrer).hostname : "",
+          utm_source: new URLSearchParams(window.location.search).get("utm_source") || "",
+          utm_medium: new URLSearchParams(window.location.search).get("utm_medium") || "",
+          utm_campaign: new URLSearchParams(window.location.search).get("utm_campaign") || ""
+        });
+      }
+    });
+
+    function linkEventName(anchor) {
+      var href = anchor.getAttribute("href") || "";
+
+      if (anchor.hasAttribute("download") || href.endsWith(".pdf")) return "resume_downloaded";
+      if (href.startsWith("mailto:")) return "contact_started";
+      if (href.includes("/case-studies/")) return "case_study_opened";
+      if (href.includes("linkedin.com")) return "linkedin_clicked";
+      if (href.includes("medium.com")) return "medium_clicked";
+      if (href.includes("github.com")) return "github_clicked";
+      if (href.startsWith("#") || href.startsWith("/#")) return "section_navigation_clicked";
+      return "portfolio_link_clicked";
+    }
+
+    document.addEventListener(
+      "click",
+      function (event) {
+        var anchor = event.target.closest && event.target.closest("a[href]");
+        if (!anchor || !window.posthog || !window.posthog.capture) return;
+
+        var href = anchor.getAttribute("href") || "";
+        var url;
+        try {
+          url = new URL(href, window.location.href);
+        } catch {
+          url = null;
+        }
+
+        window.posthog.capture(linkEventName(anchor), {
+          path: window.location.pathname,
+          link_text: anchor.textContent ? anchor.textContent.trim().replace(/\s+/g, " ").slice(0, 80) : "",
+          link_host: url ? url.hostname : "",
+          link_path: url ? url.pathname : href,
+          is_external: url ? url.hostname !== window.location.hostname : false
+        });
+      },
+      { passive: true }
+    );
+
+    document.addEventListener("submit", function (event) {
+      var form = event.target;
+      if (!form || !form.classList || !form.classList.contains("contact-form")) return;
+      if (!window.posthog || !window.posthog.capture) return;
+
+      window.posthog.capture("contact_form_submitted", {
+        path: window.location.pathname,
+        method: "mailto"
+      });
+    });
+  </script>
+)}
