@@ -4,6 +4,7 @@ import { join } from "node:path";
 const dist = new URL("../dist/", import.meta.url).pathname;
 const required = [
   "index.html",
+  "case-studies/infra-reliability-orchestrator/index.html",
   "case-studies/production-readiness/index.html",
   "case-studies/eks-upgrade/index.html",
   "case-studies/rcagpt/index.html",

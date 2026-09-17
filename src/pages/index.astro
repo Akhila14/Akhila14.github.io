@@ -2,223 +2,208 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import SiteHeader from "@components/SiteHeader.astro";
 import Footer from "@components/Footer.astro";
-import ContactActions from "@components/ContactActions";
-import CharacterStory from "@components/CharacterStory";
 import {
   capabilities,
   caseStudies,
   certifications,
+  experience,
+  metrics,
   profile,
   sideProjects,
   writing
 } from "@data/profile";
-
-const pathItems = [
-  {
-    period: "2024 — now",
-    title: "Senior DevOps Engineer",
-    detail: "Razorpay · Bangalore"
-  },
-  {
-    period: "2021 — 2024",
-    title: "DevOps Engineer → Senior DevOps Engineer",
-    detail: "Tresata · Bangalore"
-  },
-  {
-    period: "2020 — 2021",
-    title: "Software Quality Assurance Engineer",
-    detail: "Rapid Micro Bio Systems · Lowell"
-  },
-  {
-    period: "2017 — 2019",
-    title: "Masters in Computer Engineering",
-    detail: "University of Massachusetts Boston"
-  },
-  {
-    period: "2013 — 2017",
-    title: "Bachelors in Electronics Engineering",
-    detail: "University of Mumbai"
-  }
-];
 ---
 
 <BaseLayout>
   <SiteHeader />
-  <main id="main" class="story-site">
-    <section class="home-hero" aria-label="Introduction" data-story-frame="0">
-      <div class="hero-character">
-        <CharacterStory client:load variant="hero" />
-      </div>
+  <main id="main" class="portfolio">
+    <section class="home-hero" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="tiny-label">Hi, I’m Akhila Nair.</p>
-        <h1>I make production systems calmer.</h1>
+        <p class="eyebrow"><span></span> Senior DevOps Engineer · AI-native platform engineering</p>
+        <h1 id="hero-title">I build systems that stay calm <em>under pressure.</em></h1>
         <p class="hero-lede">
-          I work on production systems where downtime is expensive, context is everything, and good automation can
-          change how teams operate. I’m a Senior DevOps Engineer with 6.5 years of experience, currently at Razorpay,
-          building across Kubernetes, reliability, disaster recovery, and AI assisted DevOps.
+          I’m Akhila Nair. I design cloud platforms, reliability systems, and AI-assisted operations for production
+          environments where downtime is expensive and good decisions need evidence.
         </p>
-        <div class="hero-links" aria-label="Primary actions">
-          <a href="#work">see the work →</a>
-          <a href={profile.resume} download>resume (PDF) →</a>
-          <a href={`mailto:${profile.email}`}>{profile.email}</a>
+        <div class="hero-actions" aria-label="Primary actions">
+          <a class="button button--primary" href="#work">Explore selected work <span aria-hidden="true">↘</span></a>
+          <a class="button button--ghost" href={profile.resume} download>Download résumé</a>
         </div>
+        <p class="hero-location">Based in Bangalore · Open to opportunities in Bangalore, Mumbai & Dubai</p>
       </div>
+
+      <aside class="hero-portrait" aria-label="About Akhila">
+        <div class="portrait-frame">
+          <img src="/akhila-nair.jpg" alt={profile.portraitAlt} width="1600" height="2134" fetchpriority="high" />
+        </div>
+        <div class="portrait-caption">
+          <span class="status-dot" aria-hidden="true"></span>
+          <p><strong>Currently</strong> Senior DevOps Engineer at Razorpay</p>
+        </div>
+      </aside>
     </section>
 
-    <section id="work" class="work-index" aria-labelledby="work-title">
-      <div class="section-kicker">work</div>
-      <h2 id="work-title">Production systems I’ve worked on.</h2>
-      <p>
-        A few examples from platform and reliability work: readiness, Kubernetes upgrades, and incident review.
-        Open any one for the fuller problem, approach, and outcome.
-      </p>
-      <div class="work-list">
-        {caseStudies.map((study, index) => (
-          <a class={`work-card work-card-${index + 1}`} href={`/case-studies/${study.slug}/`}>
-            <span class="work-scene" aria-hidden="true">
-              <span class="scene-line"></span>
-              <span class="scene-dot scene-dot-a"></span>
-              <span class="scene-dot scene-dot-b"></span>
-              <span class="scene-dot scene-dot-c"></span>
-            </span>
-            <span class="work-kicker">{String(index + 1).padStart(2, "0")} / {study.kicker}</span>
-            <strong>{study.title}</strong>
-            <small>{study.homepageSummary}</small>
-            <em>{study.homepageNote} →</em>
-          </a>
-        ))}
-      </div>
+    <section class="impact-strip" aria-label="Selected impact">
+      {metrics.slice(0, 4).map((metric) => (
+        <div class="impact-stat">
+          <strong>{metric.value}</strong>
+          <span>{metric.label}</span>
+        </div>
+      ))}
     </section>
 
-    <section id="side-projects" class="side-projects-section">
-      <div class="section-heading">
-        <p class="section-kicker">side quests</p>
-        <h2>Little tools I built because I was curious.</h2>
+    <section id="work" class="section work-section" aria-labelledby="work-title">
+      <div class="section-intro">
+        <p class="eyebrow"><span></span> Selected work</p>
+        <h2 id="work-title">Reliability, made visible and repeatable.</h2>
         <p>
-          This is the part I hope makes people smile a bit: small, local-first projects that came from “wait, why is
-          this annoying?” and turned into useful systems.
+          My best work turns operational knowledge into systems teams can trust: evidence-backed checks, safer
+          platform changes, and AI that reduces toil without removing human judgment.
         </p>
       </div>
-      <div class="side-project-list">
-        {sideProjects.map((project, index) => (
-          <a href={project.url} rel="noreferrer">
-            <span>{String(index + 1).padStart(2, "0")} / {project.label}</span>
-            <strong>{project.title}</strong>
-            <p>{project.summary}</p>
-            <small>{project.detail}</small>
+
+      <div class="work-grid">
+        {caseStudies.map((study, index) => (
+          <a class={`project-card project-card--${index + 1}`} href={`/case-studies/${study.slug}/`}>
+            <div class="project-topline">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <span>{study.kicker}</span>
+            </div>
+            <div class="project-copy">
+              <h3>{study.title}</h3>
+              <p>{study.homepageSummary}</p>
+            </div>
+            <div class="project-result">
+              <span>Outcome</span>
+              <strong>{study.result}</strong>
+              <i aria-hidden="true">↗</i>
+            </div>
           </a>
         ))}
       </div>
     </section>
 
-    <section id="process" class="process-section">
-      <div>
-        <p class="section-kicker">how I work</p>
-        <h2>I turn operational anxiety into visible systems.</h2>
+    <section class="section principles-section" aria-labelledby="principles-title">
+      <div class="section-intro section-intro--compact">
+        <p class="eyebrow eyebrow--light"><span></span> How I work</p>
+        <h2 id="principles-title">AI should compress the toil, not hide the decision.</h2>
       </div>
-      <ol class="process-list">
+      <ol class="principles-list">
         <li>
           <span>01</span>
-          <strong>Make the invisible visible.</strong>
-          <p>Map the actual signals: incidents, logs, ownership, risk, dependency paths, and the places people guess.</p>
+          <div><strong>Start with evidence.</strong><p>Map incidents, risk, ownership, service signals, and the places where teams are forced to guess.</p></div>
         </li>
         <li>
           <span>02</span>
-          <strong>Automate the repeatable parts.</strong>
-          <p>Codify checks, scorecards, upgrade paths, and review flows so the team can move with confidence.</p>
+          <div><strong>Codify the repeatable.</strong><p>Turn expert judgment into checks, scorecards, upgrade paths, and observable workflows.</p></div>
         </li>
         <li>
           <span>03</span>
-          <strong>Keep humans in the hard decisions.</strong>
-          <p>Use AI to compress prep work, not to hide accountability. The machine drafts; the engineer decides.</p>
+          <div><strong>Keep humans accountable.</strong><p>Let agents gather context and draft. Let engineers make the consequential call.</p></div>
         </li>
       </ol>
     </section>
 
-    <section id="experience" class="experience-section">
-      <div class="section-heading">
-        <p class="section-kicker">path here</p>
-        <h2>The short version.</h2>
+    <section id="experience" class="section experience-section" aria-labelledby="experience-title">
+      <div class="section-intro">
+        <p class="eyebrow"><span></span> Experience</p>
+        <h2 id="experience-title">Six years across cloud, platform, and production reliability.</h2>
       </div>
-      <div class="path-list">
-        {pathItems.map((item) => (
-          <article class="path-item">
-            <span>{item.period}</span>
-            <strong>{item.title}</strong>
-            <p>{item.detail}</p>
+      <div class="timeline">
+        {experience.map((role, index) => (
+          <article class="timeline-item">
+            <div class="timeline-marker"><span>{String(index + 1).padStart(2, "0")}</span></div>
+            <div class="timeline-role">
+              <p>{role.period}</p>
+              <h3>{role.role}</h3>
+              <strong>{role.company} · {role.location}</strong>
+            </div>
+            <ul>
+              {role.highlights.map((highlight) => <li>{highlight}</li>)}
+            </ul>
           </article>
         ))}
-        <article class="path-item path-item--certs">
-          <span>certifications</span>
-          <strong>{certifications.join(" · ")}</strong>
-        </article>
+      </div>
+      <div class="credentials-row">
+        <p><span>Education</span> M.S. Computer Engineering · University of Massachusetts Boston</p>
+        <p><span>Certifications</span> {certifications.join(" · ")}</p>
       </div>
     </section>
 
-    <section class="capabilities-section" aria-labelledby="capabilities-title">
-      <p class="section-kicker">tools I reach for</p>
-      <h2 id="capabilities-title">Cloud-native, reliability, and AI operations.</h2>
-      <div class="capability-cloud">
-        {capabilities.flatMap((capability) => capability.skills).map((skill) => <span>{skill}</span>)}
+    <section class="section capabilities-section" aria-labelledby="capabilities-title">
+      <div class="section-intro section-intro--compact">
+        <p class="eyebrow"><span></span> Core toolkit</p>
+        <h2 id="capabilities-title">Deep infrastructure fluency, applied with product judgment.</h2>
       </div>
-    </section>
-
-    <section id="writing" class="writing-section">
-      <div class="section-heading">
-        <p class="section-kicker">writing</p>
-        <h2>Where DevOps Ends and AI Begins.</h2>
-        <p>Public notes on incidents, agents, dashboards, and the messy human edge of automation.</p>
-      </div>
-      <div class="writing-list" aria-label="Selected Medium writing">
-        {writing.map((article) => (
-          <a href={article.url} rel="noreferrer">
-            <span>{article.label}</span>
-            <strong>{article.homeTitle}</strong>
-            <small>{article.note}</small>
-          </a>
+      <div class="capability-grid">
+        {capabilities.map((capability, index) => (
+          <article>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <h3>{capability.group}</h3>
+            <p>{capability.skills.join(" · ")}</p>
+          </article>
         ))}
       </div>
     </section>
 
-    <section id="about" class="about-section">
-      <div class="about-layout">
-        <figure class="about-doodle">
-          <img
-            src="/akhila-about-chico.jpg"
-            alt="Hand-drawn Akhila sitting in a park with coffee, a ball, and Chico the dog"
-            loading="lazy"
-            width="1200"
-            height="800"
-          />
-        </figure>
-        <div class="about-letter">
-          <p class="section-kicker">if you’re curious</p>
-          <h2>A little more about me.</h2>
-          <p>
-            I’m Akhila. I like the part of engineering where production reality meets new ideas. At work, that usually
-            means Kubernetes, reliability, disaster recovery, observability, incident review, and figuring out where AI
-            can actually help instead of just sounding impressive.
-          </p>
-          <p>
-            My strongest work happens when a problem is messy and operational: a release needs a clear gate, a cluster
-            upgrade needs a safer path, an incident needs context, or a team needs tooling that explains what changed.
-            I enjoy turning that ambiguity into systems people can trust and use.
-          </p>
-          <p>
-            I keep up with the latest AI by building with it, not just reading about it. Some experiments become side
-            projects, some become writing, and some quietly change how I think about production work.
-          </p>
+    <section id="writing" class="section field-notes" aria-labelledby="writing-title">
+      <div class="section-intro">
+        <p class="eyebrow"><span></span> Building in public</p>
+        <h2 id="writing-title">Experiments, tools, and field notes.</h2>
+        <p>What I learn from building at the edge of infrastructure and AI—published as working software and honest notes.</p>
+      </div>
+      <div class="notes-layout">
+        <div class="writing-list" aria-label="Selected writing">
+          {writing.map((article, index) => (
+            <a href={article.url} rel="noreferrer">
+              <span>{String(index + 1).padStart(2, "0")} · {article.label}</span>
+              <strong>{article.homeTitle}</strong>
+              <i aria-hidden="true">↗</i>
+            </a>
+          ))}
+        </div>
+        <div class="side-projects" aria-label="Side projects">
+          <p class="mini-label">Open-source side quests</p>
+          {sideProjects.map((project) => (
+            <a href={project.url} rel="noreferrer">
+              <strong>{project.title}</strong>
+              <span>{project.label}</span>
+              <p>{project.summary}</p>
+            </a>
+          ))}
         </div>
       </div>
     </section>
 
-    <section id="contact" class="contact-section">
-      <div>
-        <p class="section-kicker">contact</p>
-        <h2>Let’s build systems that behave beautifully under pressure.</h2>
-        <p>{profile.availability}</p>
+    <section id="about" class="section about-section">
+      <figure>
+        <img src="/akhila-about-chico.jpg" alt="Illustration of Akhila relaxing in a park with her dog Chico" loading="lazy" width="1200" height="800" />
+        <figcaption>Outside the terminal: coffee, parks, and Chico.</figcaption>
+      </figure>
+      <div class="about-copy">
+        <p class="eyebrow"><span></span> Beyond the systems</p>
+        <h2>I like hard problems that become calm, useful tools.</h2>
+        <p>
+          I’m most at home where production reality meets new ideas: a risky release needs a clear gate, a fleet
+          upgrade needs a safer rhythm, or an incident needs context before the next decision.
+        </p>
+        <p>
+          I keep up with AI by building with it. Some experiments become internal platforms, some become open-source
+          tools, and some become stories about what worked, what broke, and what humans still need to own.
+        </p>
       </div>
-      <ContactActions client:load />
+    </section>
+
+    <section id="contact" class="contact-section">
+      <p class="eyebrow eyebrow--light"><span></span> Let’s talk</p>
+      <h2>Building systems that need to behave beautifully under pressure?</h2>
+      <p>I’d love to hear about the problem.</p>
+      <div class="contact-actions">
+        <a class="button button--accent" href={`mailto:${profile.email}`}>Start a conversation <span aria-hidden="true">↗</span></a>
+        <a href={profile.linkedin} rel="noreferrer">LinkedIn</a>
+        <a href={profile.github} rel="noreferrer">GitHub</a>
+        <a href={profile.medium} rel="noreferrer">Medium</a>
+      </div>
     </section>
   </main>
   <Footer />

@@ -1,7 +1,7 @@
 export const profile = {
   name: "Akhila Nair",
   role: "Senior DevOps Engineer",
-  headline: "I build systems that stay reliable—and AI that helps operate them.",
+  headline: "I build systems that stay calm under pressure.",
   availability: "Exploring opportunities in Bangalore, Mumbai, and Dubai.",
   locationSignal: "Bangalore · Mumbai · Dubai",
   email: "akhilanair1412@gmail.com",
@@ -11,18 +11,44 @@ export const profile = {
   github: "https://github.com/Akhila14",
   portraitAlt: "Akhila Nair standing outdoors along a green walkway",
   summary:
-    "Senior DevOps Engineer with 6.5 years of experience building scalable cloud-native platforms and reliability systems across AWS and Azure. I work where Kubernetes, infrastructure automation, observability, and AI-assisted operations meet."
+    "Senior DevOps Engineer building cloud platforms, reliability systems, and AI-assisted operations across AWS and Azure."
 };
 
 export const metrics = [
   { value: "150+", label: "production EKS clusters upgraded" },
-  { value: "0", label: "downtime during fleet upgrade" },
-  { value: "15 min", label: "production readiness from days" },
-  { value: "10 min", label: "RCA review flow from roughly 5 hours" },
+  { value: "90", label: "evidence-backed reliability checks" },
+  { value: "70+", label: "remediation PRs auto-drafted" },
   { value: "60%", label: "logging cost reduction with Coralogix" }
 ];
 
 export const caseStudies = [
+  {
+    slug: "infra-reliability-orchestrator",
+    title: "Infra Reliability Orchestrator",
+    kicker: "Reliability as code",
+    summary:
+      "An evidence-backed system that scores service reliability, drafts remediation PRs, and prevents safeguards from quietly disappearing.",
+    homepageSummary:
+      "A reliability layer built from Kubernetes manifests, live alerts, and each service's own incident history.",
+    homepageNote: "Turning incident history into preventive engineering.",
+    result: "90 checks · 70+ PRs drafted",
+    scale: "Kubernetes manifests, alerts, and 100+ historical incident RCAs",
+    stack: ["Kubernetes", "LLMs", "Incident RCAs", "Policy Gates", "GitHub"],
+    problem:
+      "Reliability reviews were fragmented across manifests, monitoring configuration, team knowledge, and lessons buried in historical incident reports. That made gaps difficult to spot and safeguards easy to remove unintentionally.",
+    approach:
+      "Built an orchestrator that gathers evidence from Kubernetes resources, alerting rules, and more than 100 historical RCAs. It evaluates each service across 90 reliability checks, explains the evidence behind the score, and turns actionable gaps into remediation pull requests.",
+    contribution:
+      "Designed the evidence model and orchestration flow during Razorpay's Day 0 hackathon, connected reliability findings to code changes, and added a pull-request gate that catches changes removing existing safeguards.",
+    outcome:
+      "Created an auditable reliability score for every service, auto-drafted more than 70 remediation pull requests, and shifted incident learning from passive documentation into preventive engineering.",
+    architecture: [
+      "Service evidence",
+      "90 reliability checks",
+      "Contextual risk score",
+      "Remediation PR + gate"
+    ]
+  },
   {
     slug: "production-readiness",
     title: "Agentic production readiness",
@@ -30,7 +56,7 @@ export const caseStudies = [
     summary:
       "An org-wide readiness framework that turned a days-long manual review into a 15-minute automated assessment.",
     homepageSummary:
-      "A readiness flow that gives teams consistent signals before launch instead of another subjective review meeting.",
+      "Specialist agents assess security, observability, reliability, and cell health before a service goes live.",
     homepageNote: "Making launch reviews feel less like guesswork.",
     result: "Days to 15 minutes",
     scale: "Security, observability, reliability, and cell-health checks",
@@ -57,7 +83,7 @@ export const caseStudies = [
     summary:
       "A repeatable upgrade pipeline for 150+ production EKS clusters using analyzer, node rotation, and cluster upgrade skills.",
     homepageSummary:
-      "A safer upgrade rhythm for a large Kubernetes fleet, with checks and sequencing built into the path.",
+      "A version analyzer, node rotation skill, and cluster upgrade skill made a high-risk fleet change repeatable.",
     homepageNote: "Making scary fleet changes feel routine.",
     result: "150+ clusters, zero downtime",
     scale: "Production fleet across critical workloads",
@@ -84,7 +110,7 @@ export const caseStudies = [
     summary:
       "An AI-assisted incident management tool that drafts RCA narratives from incident signals for faster review.",
     homepageSummary:
-      "An AI-assisted incident review tool that helps tired engineers turn scattered signals into a first draft.",
+      "An AI-assisted incident review tool that turns scattered signals into a consistent first draft for human review.",
     homepageNote: "Making post-incident learning gentler on tired engineers.",
     result: "Roughly 5 hours to 10 minutes",
     scale: "Incident signals, logs, notes, and post-mortem context",

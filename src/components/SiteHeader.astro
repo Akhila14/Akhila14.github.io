@@ -3,18 +3,12 @@ import { profile } from "@data/profile";
 ---
 
 <header class="site-header" aria-label="Primary">
-  <a class="brand" href="/" aria-label={`${profile.name} home`}>{profile.name.toLowerCase()}</a>
+  <a class="brand" href="/" aria-label={`${profile.name} home`}>{profile.name}</a>
   <nav class="nav-links" aria-label="Site sections">
-    <a href="/#work">work</a>
-    <span aria-hidden="true">·</span>
-    <a href="/#side-projects">side quests</a>
-    <span aria-hidden="true">·</span>
-    <a href="/#experience">path</a>
-    <span aria-hidden="true">·</span>
-    <a href="/#writing">writing</a>
-    <span aria-hidden="true">·</span>
-    <a href="/#about">about</a>
-    <span aria-hidden="true">·</span>
-    <a href="/#contact">contact</a>
+    <a href="/#work">Work</a>
+    <a href="/#experience">Experience</a>
+    <a href="/#writing">Writing</a>
+    <a href="/#contact">Contact</a>
+    <a class="nav-resume" href={profile.resume} download>Résumé ↗</a>
   </nav>
 </header>

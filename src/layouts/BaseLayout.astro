@@ -10,7 +10,7 @@ type Props = {
 };
 
 const {
-  title = `${profile.name} — ${profile.role}`,
+  title = `${profile.name} — AI-native Reliability Engineering`,
   description = profile.summary,
   image = "/og-image.png"
 } = Astro.props;
@@ -18,7 +18,7 @@ const {
 const enableFigmaCapture = process.env.PUBLIC_FIGMA_CAPTURE === "1";
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = new URL(image, Astro.site);
-const socialImageAlt = "Akhila Nair portfolio preview card with DevOps, Kubernetes, cloud reliability, AI systems, and Chico the Labrador.";
+const socialImageAlt = "Akhila Nair - AI-native reliability engineering.";
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -50,7 +50,7 @@ const jsonLd = {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#f4f0e5" />
+    <meta name="theme-color" content="#0a1718" />
     <meta property="og:type" content="profile" />
     <meta property="og:site_name" content="Akhila Nair" />
     <meta property="og:title" content={title} />
