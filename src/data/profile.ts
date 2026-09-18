@@ -27,26 +27,26 @@ export const caseStudies = [
     title: "DevOps Agent",
     kicker: "AI for operations",
     summary:
-      "An end-to-end operational agent that combines trusted internal knowledge, live tool access, and continuous evaluation.",
+      "An end-to-end operational agent that combines trusted knowledge, live tool access, guarded write operations, and continuous evaluation.",
     homepageSummary:
-      "A production-minded agent that can investigate operational questions, use connected tools, and handle troubleshooting workflows with measurable quality.",
-    homepageNote: "Giving engineers answers with evidence, not another chatbot.",
-    result: "Knowledge + tools + evaluations",
-    scale: "Operational knowledge base, MCP integrations, and task-level quality metrics",
-    stack: ["LLMs", "MCP", "Knowledge Base", "Agent Evaluation", "DevOps Automation"],
+      "Investigates operational issues, reviews Terraform changes, and—with explicit approval—can safely act through connected tools.",
+    homepageNote: "From operational question to governed action.",
+    result: "60% fewer DevOps tickets",
+    scale: "Knowledge base, MCP integrations, Terraform workflows, identity, and audit logs",
+    stack: ["LLMs", "MCP", "Terraform", "Knowledge Base", "Agent Evaluation", "Audit Logging"],
     problem:
       "Operational context lived across documentation, dashboards, infrastructure tools, and experienced engineers. Getting to a useful answer often meant manually gathering evidence before troubleshooting could even begin.",
     approach:
-      "Built an end-to-end DevOps Agent that grounds its reasoning in a curated knowledge base and uses MCP-based integrations to interact with operational tools. The workflow is designed to gather context, investigate, act where appropriate, and return a traceable result.",
+      "Built an end-to-end DevOps Agent that grounds its reasoning in a curated knowledge base and uses MCP-based integrations to interact with operational tools. It investigates issues, reviews and approves Terraform pull requests, and performs controlled write operations only after explicit human approval.",
     contribution:
-      "Designed and built the agent architecture, knowledge and tool integration pattern, and the evaluation layer used to measure accuracy and effectiveness across operational tasks.",
+      "Designed the agent architecture, knowledge and tool integration pattern, evaluation layer, and approval controls. Every action is logged and tied to the requesting identity, creating a clear audit trail for both reviews and write operations.",
     outcome:
-      "Created a reusable agentic workflow for operational support and troubleshooting, with built-in evaluations that make quality visible and help the system improve over time.",
+      "Reduced DevOps ticket volume by 60%. The agent now resolves routine operational requests, reviews and approves Terraform pull requests, and—where authorized—executes write operations with explicit approval, complete logging, and identity attribution.",
     architecture: [
-      "Operational request",
+      "Authenticated request",
       "Knowledge retrieval",
-      "MCP tool execution",
-      "Evaluated result"
+      "Review + approval gate",
+      "Logged MCP action"
     ]
   },
   {
