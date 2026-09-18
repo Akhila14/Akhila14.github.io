@@ -23,6 +23,33 @@ export const metrics = [
 
 export const caseStudies = [
   {
+    slug: "devops-agent",
+    title: "DevOps Agent",
+    kicker: "AI for operations",
+    summary:
+      "An end-to-end operational agent that combines trusted internal knowledge, live tool access, and continuous evaluation.",
+    homepageSummary:
+      "A production-minded agent that can investigate operational questions, use connected tools, and handle troubleshooting workflows with measurable quality.",
+    homepageNote: "Giving engineers answers with evidence, not another chatbot.",
+    result: "Knowledge + tools + evaluations",
+    scale: "Operational knowledge base, MCP integrations, and task-level quality metrics",
+    stack: ["LLMs", "MCP", "Knowledge Base", "Agent Evaluation", "DevOps Automation"],
+    problem:
+      "Operational context lived across documentation, dashboards, infrastructure tools, and experienced engineers. Getting to a useful answer often meant manually gathering evidence before troubleshooting could even begin.",
+    approach:
+      "Built an end-to-end DevOps Agent that grounds its reasoning in a curated knowledge base and uses MCP-based integrations to interact with operational tools. The workflow is designed to gather context, investigate, act where appropriate, and return a traceable result.",
+    contribution:
+      "Designed and built the agent architecture, knowledge and tool integration pattern, and the evaluation layer used to measure accuracy and effectiveness across operational tasks.",
+    outcome:
+      "Created a reusable agentic workflow for operational support and troubleshooting, with built-in evaluations that make quality visible and help the system improve over time.",
+    architecture: [
+      "Operational request",
+      "Knowledge retrieval",
+      "MCP tool execution",
+      "Evaluated result"
+    ]
+  },
+  {
     slug: "infra-reliability-orchestrator",
     title: "Infra Reliability Orchestrator",
     kicker: "Reliability as code",
